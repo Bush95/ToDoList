@@ -1,0 +1,142 @@
+@sm: ~"only screen and (min-width: 660px)";
+
+
+html{
+    min-height: 100%;
+    height: auto;
+}
+body{
+    background: url(../images/page_background.jpg) center center /cover;
+    background-attachment: fixed;
+    font-family: 'Quattrocento', serif;
+    min-height: 100%;
+    color: aliceblue;
+    text-shadow: 4px -1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.page-content{
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-bottom: 140px;
+}
+
+.page-title{
+    overflow: auto;
+    *{
+        text-align: center;
+    }
+    h1{
+        font-size: 48px;
+    }
+}
+
+.todo__container{
+    box-shadow:  0 0 10px 0 black;
+    background-color: rgba(0,0,0,0.3);
+}
+.todo-items{
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow:  2px 0 4px 2px black;
+    @media @sm{
+        width: 600px;
+    }
+}
+#todo-items__list{
+    padding: 20px 40px 10px 40px;
+}
+.todo-items__item{
+    position: relative;
+    margin-bottom: 14px;
+    animation: add_item 1s;
+    opacity: 1;
+}
+
+@keyframes add_item{
+    0%{
+        position: relative;
+        left: 500px;
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.2;
+    }
+    100%{
+        left: 0px;
+        opacity: 1;
+    }
+}
+
+#text-form{
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    width: 80%;
+    margin: -80px auto 0 auto;
+    @media @sm{
+        width: 500px;
+    }
+}
+.text-form__header{
+    text-align: center;
+}
+
+.text-form__label{
+    font-size: 14px;
+    display: block;
+    margin-left: 6px;
+    position: relative;
+    top: -68px;
+    transition: padding 600ms, opacity 600ms;
+    background-repeat: no-repeat;
+    @media @sm{
+        font-size: 18px;
+    }
+}
+#text-form__input:focus + .text-form__label{
+    #letter_count{
+        opacity: 1;
+    }
+    padding-left: 64px;
+    background-image: url(../images/pencil.png);
+    animation: writing 1.5s linear infinite;
+    @media @sm{
+        padding-left: 128px;
+    }
+}
+#letter_count{
+    position: absolute;
+    right: 4px;
+    opacity: 0;
+    transition: opacity 500ms;
+}
+@keyframes writing{
+    0%{
+        background-position: 0px 0;
+    }
+    80%{
+        background-position: 40px 0;
+    }
+    100%{
+        background-position: 0 0;
+    }
+}
+
+#text-form__input{
+    margin-top: 6px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0, 0.4);
+    border: 3px rgba(80, 80, 80, 0.29) solid;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 500ms, border 500ms;
+    &:focus{
+        background-color: rgba(0,0,0, 0.56);
+        outline: none;
+        border: 3px rgba(0, 0, 0, 0.9) solid;
+    }
+}

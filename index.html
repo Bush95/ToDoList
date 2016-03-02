@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.3/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+</head>
+
+<body>
+    <div class="page-content">
+        <header class="page-title">
+            <h1>To Do List</h1>
+        </header>
+        <div class="todo__container">
+            <div class="todo-items">
+                <ul id="todo-items__list">
+                    <li class="todo-items__item">Lorem ipsum dolor sit amet, consectetur.</li>
+                    <li class="todo-items__item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui!</li>
+                    <li class="todo-items__item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui!</li>
+                    <li class="todo-items__item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui!</li>
+                    <li class="todo-items__item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <form id="text-form">
+        
+        <input autocomplete="off" id="text-form__input" name="text-form__input" type="text">
+        <label class="text-form__label" for="text-form__input">What you want to do today?<span id="letter_count">255</span></label> 
+        <!--  ^trick to apply css to label when input is focused, position before input --> 
+    </form>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
