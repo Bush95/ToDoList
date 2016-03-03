@@ -1,0 +1,291 @@
+@sm: ~"only screen and (min-width: 360px)";
+@md: ~"only screen and (min-width: 660px)";
+html {
+    min-height: 100%;
+    height: auto;
+}
+
+body {
+    background: url(../images/page_background.jpg) center center /cover;
+    background-attachment: fixed;
+    font-family: 'Quattrocento', serif;
+    min-height: 100%;
+    color: #fff;
+    text-shadow: 3px -2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.page-content {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-bottom: 140px;
+}
+
+.page-title {
+    overflow: auto;
+    h1{
+        text-align: center;
+        font-size: 48px;
+    }
+}
+
+.todo__container {
+    box-shadow: 0 0 10px 0 black;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#todo-items {
+    box-sizing: border-box;
+    padding: 10px 30px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    @media @md {
+        width: 600px;
+    }
+    label {
+        font-size: 18px;
+        line-height: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+
+#todo-items__header,
+#todo-items__header--empty {
+    min-height: 52px;
+    margin: 0;
+    padding: 15px 0 10px 0;
+    transition: all 500ms;
+    animation: sss 1.5s;
+}
+
+@keyframes sss {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#todo-items__header--empty {
+    text-align: center;
+}
+
+#todo-items__header {
+    border-bottom: solid 2px #b7b7b7;
+    display: none;
+    margin-bottom: 10px;
+    line-height: 52px;
+}
+
+.todo-items__item {
+    position: relative;
+    margin-bottom: 14px;
+    animation: add_item 1s;
+    opacity: 1;
+}
+
+.todo-items__item--deleting {
+    position: relative;
+    animation: deleting 1s;
+    -webkit-animation-fill-mode: forwards;
+    /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode: forwards;
+    /*FF 5+*/
+    -o-animation-fill-mode: forwards;
+    /*Not implemented yet*/
+    -ms-animation-fill-mode: forwards;
+    /*IE 10+*/
+    animation-fill-mode: forwards;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 4px;
+    outline: none;
+}
+
+input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: #969696;
+    &~.todo-items__delete {
+        display: inline-block;
+        opacity: 1;
+    }
+}
+
+.todo-items__delete {
+    display: none;
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    border: solid 2px #555555;
+    border-radius: 50%;
+    position: relative;
+    top: 4px;
+    margin-left: 6px;
+    &:hover {
+        border-color: white;
+        background: #431d1d;
+        &::before,
+        &::after {
+            background: white;
+        }
+    }
+    &::before,
+    &::after {
+        position: absolute;
+        top: 7px;
+        left: 1px;
+        display: block;
+        content: ' ';
+        background: #777;
+        width: 14px;
+        height: 2px;
+    }
+    &::before {
+        transform: rotate(45deg);
+    }
+    &::after {
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes deleting {
+    0% {
+        left: 0;
+        opacity: 1;
+    }
+    80% {
+        left: -300px;
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        display: none;
+        height: 0;
+        margin: 0;
+    }
+}
+
+@keyframes add_item {
+    0% {
+        position: relative;
+        left: 500px;
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        left: 0px;
+        opacity: 1;
+    }
+}
+
+#text-form {
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    width: 80%;
+    margin: -80px auto 0 auto;
+    @media @md {
+        width: 500px;
+    }
+}
+
+.text-form__header {
+    text-align: center;
+}
+
+.text-form__label {
+    font-size: 13px;
+    display: block;
+    margin-left: 6px;
+    position: relative;
+    top: -72px;
+    transition: padding 600ms, opacity 600ms;
+    background-repeat: no-repeat;
+    padding-right: 25px;
+    padding-bottom: 6px;
+    @media @md {
+        padding-bottom: 0;
+        font-size: 18px;
+    }
+}
+
+#text-form__input {
+    margin-top: 6px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 3px rgba(80, 80, 80, 0.29) solid;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 500ms, border 500ms;
+    &:focus {
+        background-color: rgba(0, 0, 0, 0.56);
+        outline: none;
+        border: 3px rgba(0, 0, 0, 0.9) solid;
+    }
+}
+
+#text-form__input:focus + .text-form__label {
+    #letter_count {
+        opacity: 1;
+    }
+    padding-left: 44px;
+    background-image: url(../images/pencil.png);
+    animation: writing 1.1s linear infinite;
+    @media @sm {
+        padding-left: 80px;
+    }
+    @media @md {
+        animation: writing 1.5s linear infinite;
+        padding-left: 128px;
+    }
+}
+
+@keyframes writing {
+    0% {
+        background-position: 0px 0;
+    }
+    80% {
+        background-position: 20px 0;
+        @media @md {
+            background-position: 40px 0;
+        }
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@media @md {
+    @keyframes writing {
+        0% {
+            background-position: 0px 0;
+        }
+        80% {
+            background-position: 40px 0;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+}
+
+#letter_count {
+    position: absolute;
+    right: 4px;
+    opacity: 0;
+    transition: opacity 500ms;
+}
