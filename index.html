@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+</head>
+ 
+<body>
+    <div class="page-content">
+        <header class="page-title">
+            <h1>To Do List</h1>
+        </header>
+        <div class="todo__container">
+            <div id="todo-items">
+                <h2 id="todo-items__header--empty">Nothing is here!<br>Add a todo to get started.</h2>
+                <h2 id="todo-items__header">Things to do:</h2>
+            </div>
+        </div>
+    </div>
+    <form id="text-form">
+        
+        <input autocomplete="off" id="text-form__input" name="text-form__input" type="text" maxlength="255">
+        <label class="text-form__label" for="text-form__input">What you want to do today?<span id="letter_count">255</span></label> 
+        <!--  ^trick to apply css to label when input is focused, position before input --> 
+    </form>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
