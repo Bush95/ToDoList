@@ -1,74 +1,70 @@
-function addEventListeners(){
-    var text_input = document.getElementById('text-form__input');
-    var char_counter = document.getElementById('letter_count');
-    var form = document.getElementById('text-form');
-    var max_string_length = 255;
-    var num_of_items = 0;
-    var item_id = 0;
-        
-    text_input.setAttribute('maxlength', max_string_length);
-    text_input.addEventListener('keyup',count_chars,false);
+function on_load_event() {
+    window.max_text_length = document.getElementById('text-form__input').getAttribute('maxlength');
+    window.todo_highest_id = 0;
+    window.todos_num = 0;
+
+    add_event_listeners();
+}
+
+function add_event_listeners() {
+    document.getElementById('text-form__input').addEventListener('keyup', letter_count, false);
+    document.getElementById('text-form').addEventListener('submit', submit_f, false);
+}
+function letter_count(e) {
+    var curr_length = this.value.length;
+    document.getElementById('letter_count').innerHTML = max_text_length - curr_length;
+}
+function submit_f(e){
+    add_todo(e);
+}
+function add_todo(e) {
+    e.preventDefault();
+
+    var new_item = document.createElement('div');
+    var new_item_input = document.createElement('input');
+    var new_item_label = document.createElement('label');
+    var new_item_del = document.createElement('div');
+
+    new_item.className = 'todo-items__item';
+    new_item_input.id = 'item_' + todo_highest_id;
+    new_item_input.setAttribute('type', 'checkbox');
+    new_item_label.setAttribute('for', 'item_' + todo_highest_id);
+    new_item_label.innerHTML = ' ' + document.getElementById('text-form__input').value;
+    new_item_del.className = 'todo-items__delete';
     
-    form.addEventListener('submit',function(e){
-        e.preventDefault()
-    },false);
+    new_item_del.addEventListener('click', delete_todo, false);
 
-    function count_chars(e){
-        var value = this.value
-        var value_length = value.length;
-        char_counter.innerHTML = max_string_length - value_length;
-        
-        function list_header(){
-            if (num_of_items > 0){
-                document.getElementById('todo-items__header--empty').style.display = "none";
-                document.getElementById('todo-items__header').style.display = "block";
-            }else{
-                document.getElementById('todo-items__header--empty').style.display = "block";
-                document.getElementById('todo-items__header').style.display = "none";
-            }
-        }
-        
-        if(e.keyCode === 13){
-            var new_item = document.createElement('div');
-            var new_input = document.createElement('input');
-            var new_label = document.createElement('label');
-            var new_del = document.createElement('div');
-            num_of_items++;
-            item_id++;
-            
-            list_header();
-            new_item.className = 'todo-items__item';
-            
-            new_input.id = 'item_'+item_id;
-            new_input.setAttribute('type','checkbox');
-            
-            new_label.setAttribute('for','item_'+item_id);
-            new_label.innerHTML = ' '+value;
-            
-            new_del.className = 'todo-items__delete';
-            new_del.addEventListener('click',function(){
-                this.parentNode.className += ' '+'todo-items__item--deleting';
-                num_of_items--;
-                list_header();
-            },false);
-            
-            text_input.value = "";
-            new_item.appendChild(new_input);
-            new_item.appendChild(new_label);
-            new_item.appendChild(new_del);
-            document.getElementById('todo-items').appendChild(new_item);
-            
-            char_counter.innerHTML = max_string_length;
-            return false;
-        }else{
-            return true;
-        }
+    new_item.appendChild(new_item_input);
+    new_item.appendChild(new_item_label);
+    new_item.appendChild(new_item_del);
+    document.getElementById('todo-items').appendChild(new_item);
+    
+    todo_highest_id++;
+    todos_num++;
+    
+    clear_input();
+    set_header();
+}
+function delete_todo() {
+    this.parentNode.className += ' ' + 'todo-items__item--deleting';
+    todos_num--;
+    set_header();
+}
+function clear_input() {
+    document.getElementById('text-form__input').value = "";
+}
+function set_header(){
+    var h_nothing = document.getElementById('todo-items__header--empty');
+    var h_filled = document.getElementById('todo-items__header');
+
+    if(todos_num === 0){
+        h_filled.style.display = 'none';
+        h_nothing.style.display = 'block';
     }
-};
-
-
-function on_load_event(){
-    addEventListeners();
+    else{
+        h_filled.style.display = 'block';
+        h_nothing.style.display = 'none';
+    }
 }
 
 window.onload = on_load_event();
