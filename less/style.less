@@ -22,7 +22,7 @@ body {
 
 .page-title {
     overflow: auto;
-    h1{
+    h1 {
         text-align: center;
         font-size: 48px;
     }
@@ -56,23 +56,25 @@ body {
 
 #todo-items__header,
 #todo-items__header--empty {
-    min-height: 52px; 
+    min-height: 52px;
     margin: 0;
     padding: 15px 0 10px 0;
     animation: a_opacity 1.5s;
-} 
+}
 
-@keyframes a_opacity{
+@keyframes a_opacity {
     0% {
         opacity: 0;
     }
     100% {
         opacity: 1;
-    } 
+    }
 }
+
 #todo-items__header--empty {
     text-align: center;
 }
+
 #todo-items__header {
     border-bottom: solid 2px #b7b7b7;
     display: none;
@@ -82,34 +84,24 @@ body {
 
 .todo-items__item {
     position: relative;
-    margin-bottom: 14px;
+    overflow: hidden;
     animation: add_item 1s;
     opacity: 1;
+    height: 40px;
+    transition: height 500ms;
+    &::after {
+        display: block;
+        width: 100%;
+        height: 14px;
+        content: ' ';
+    }
 }
 
 .todo-items__item--deleting {
     position: relative;
-    animation: deleting 1s;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-fill-mode: forwards;
-    -o-animation-fill-mode: forwards;
-    -ms-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
+    height: 0;
 }
-@keyframes deleting {
-    0% {
-        left: 0;
-        opacity: 1;
-    }
-    100% {
-        left: -300px;
-        opacity: 0;
-        visibility: hidden;
-        display: none;
-        height: 0;
-        margin: 0;
-    }
-}
+
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
@@ -118,8 +110,8 @@ input[type="checkbox"] {
     outline: none;
 }
 
-input[type="checkbox"]:checked{
-    & + label{
+input[type="checkbox"]:checked {
+    & + label {
         text-decoration: line-through;
         color: #969696;
     }
@@ -185,6 +177,7 @@ input[type="checkbox"]:checked{
         width: 500px;
     }
 }
+
 .text-form__label {
     font-size: 13px;
     display: block;
@@ -199,6 +192,7 @@ input[type="checkbox"]:checked{
         font-size: 18px;
     }
 }
+
 #text-form__input {
     margin-top: 6px;
     box-sizing: border-box;
